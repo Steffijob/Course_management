@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -18,7 +17,6 @@ import {HttpClientModule} from '@angular/common/http'
     AppComponent,
     SignupComponent,
     LoginComponent,
-    ProfileComponent,
     NavbarComponent,
     FooterComponent,
     DashboardComponent
