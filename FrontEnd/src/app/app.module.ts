@@ -10,7 +10,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+import { CourseComponent } from './course/course.component';
+import { JoinnowComponent } from './joinnow/joinnow.component';
+import { AboutComponent } from './about/about.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import {HttpClientModule} from '@angular/common/http'
     LoginComponent,
     NavbarComponent,
     FooterComponent,
-    DashboardComponent
+    DashboardComponent,
+    HomeComponent,
+    CourseComponent,
+    JoinnowComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
