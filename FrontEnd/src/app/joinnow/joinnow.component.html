@@ -1,17 +1,51 @@
-<section class="joinnow">
-    <div class="login col-lg-4 m-auto shadow-lg">
-        <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <button type="submit" class="btn btn-primary col-lg-12">Log In</button>
-          </form>
+ <body>
+  <div class="center">
+    <h1>Signup</h1>
+    <form #form="ngForm" (ngSubmit)="form.valid&&onSubmit()">
+      <div class="txt_field">
+        <input type="text" name="fullName" #fullName="ngModel" [(ngModel)]="registerUserData.fullName" required>
+        <span></span>
+        <label>Full Name</label>
+        <label class="text-danger" *ngIf="form.submitted&&fullName.errors?.['required']">Full Name required</label>
+      </div>
+      
+      <div class="txt_field">
+          <input type="text" name="email" #email="ngModel" [(ngModel)]="registerUserData.email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+          <span></span>
+          <label>Email</label>
+          <label class="text-danger" *ngIf="form.submitted&&email.errors?.['required']">Email required</label>
+          <label class="text-danger" *ngIf="form.submitted&&email.errors?.['pattern']">Email Invalid</label>          
+          <!-- <label class="text-danger" *ngIf="form.submitted&&email.errors?.['pattern']">Invalid Email Id</label> -->
+        </div>
+        
+        <div class="txt_field">
+          <input type="number" name="phoneNo" #phoneNo="ngModel" [(ngModel)]="registerUserData.phoneNo" pattern="^((\\+91-?)|0)?[0-9]{10}$"  required>
+          <span></span>
+          <label>Phone number</label>
+          <label class="text-danger" *ngIf="form.submitted&&phoneNo.errors?.['required']">Phone number required</label>
+          <label class="text-danger" *ngIf="form.submitted&&phoneNo.errors?.['pattern']">Phone number Invalid</label>
+        <!-- <label class="text-danger" *ngIf="form.submitted&&phone.errors?.['pattern']">Invalid Phone Number</label> -->
+        </div>
 
-    </div>
-</section>
+        
+      <div class="txt_field">
+        <input type="password" name="password" #password="ngModel" minlength="4" [(ngModel)]="registerUserData.password" required>
+        <span></span>
+        <label for="password">Password</label><br>
+        <label class="text-danger" *ngIf="form.submitted&&password.errors?.['required']">Password required</label>
+        <label class="text-danger" *ngIf="form.submitted&&password.errors?.['minlength']">Password Invalid</label>
+      </div>
+      <div class="txt_field">
+          <input type="password" minlength="4" name="repeatPassword" #repeatPassword="ngModel" [(ngModel)]="registerUserData.repeatPassword" required> 
+          <span></span>
+          <label for="confirmpassword">Confirm Password</label><br>
+          <label class="text-danger" *ngIf="form.submitted&&repeatPassword.errors?.['required']">Confirm Password required</label>
+        <label class="text-danger" *ngIf="(repeatPassword.touched || form.submitted)&&registerUserData.repeatPassword !== registerUserData.password">Confirm Password and Password must be same</label>
+        </div>
+         <input (click)="signup()" type="submit" value="Signup"><br><br>
+        <div class="login_link">
+         <p>Already a member? <a routerLink="/login">Login</a></p>
+        </div>
+    </form>
+  </div>
+</body>
