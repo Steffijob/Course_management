@@ -1,24 +1,31 @@
-<div class ="container mt-2">
-    <div class ="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-lg p-5 mt-5">
-                <h1>Welcome back</h1><hr>
-                <!-- <div class="alert alert-success" role="alert">
-                    Login Successfull ! <a href="">Forget Password ?</a>
-                  </div> -->
-                <form [formGroup]="loginForm" class="text-left">
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" placeholder="Email" formControlName="email">
-                        <label>Password</label>
-                        <input type="password" class="form-control" placeholder="********"formControlName="password">
-
-                    </div><br>
-                    <button class="btn btn-outline-primary btn-block" (click)="login()">Login</button>
-                </form>
-            </div>
-        </div>
+ <body>
+    <div class="center">
+      <h1>Login</h1>
+      <form #form="ngForm" (ngSubmit)="onlogin()">
+        
+  
+          <div class="txt_field">
+            <input type="text" name="email" #email="ngModel" [(ngModel)]="loginUserData.email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+            <span></span>
+            <label>Email</label>
+            <label class="text-danger" *ngIf="form.submitted&&email.errors?.['required']">Email required</label>
+            <label class="text-danger" *ngIf="form.submitted&&email.errors?.['pattern']">Email Invalid</label>          
+          </div>
+  
+          <div class="txt_field">
+            <input type="password" minlength="4" name="password" #password="ngModel" [(ngModel)]="loginUserData.password" required>
+            <span></span>
+            <label>Password</label><br>
+            <label class="text-danger" *ngIf="form.submitted&&password.errors?.['required']">Password required</label>
+            <label class="text-danger" *ngIf="form.submitted&&password.errors?.['minlength']">Password Invalid</label>
+          </div>
+  
+          <input type="submit" value="Login">
+          <div class="signup_link">
+            Not a member? <a routerLink="/joinnow">Signup</a><br>
+          </div>
+      </form>
     </div>
-</div> 
+  </body>
 
  

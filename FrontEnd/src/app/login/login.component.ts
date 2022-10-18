@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+// import { NgToastService } from 'ng-angular-popup'
 
 
 @Component({
@@ -9,28 +10,37 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup
-  constructor(private fb:FormBuilder, private auth:AuthService) { 
-    this.loginForm = this.fb.group({
-      'email':['',Validators.required],
-      'password':['',Validators.required]
-    })
-  }
+  
+  constructor( public auth:AuthService,public router: Router) { }
+
+  // private toast:NgToastService,
+  loginUserData = {email:'', password:''};
 
   ngOnInit(): void {
   }
-  login(){
-    //alert("Login Success")
-    const data = this.loginForm.value;
-    this.auth.signin(data).subscribe((res)=>{
-      if(res.success){
-        localStorage.setItem('token', res.token)
-        alert(res.message)
-      }else{
-        alert(res.message) 
-      }
-    },(err:any) =>{
-      alert("login failed")
-    })
+
+  token: string | undefined;
+  
+onlogin() {
+    console.log("login button hit");
+    console.log(this.loginUserData);
+
+    if(this.loginUserData.email==null||this.loginUserData.password==null){
+      console.log("values missing");
+      this.router.navigate(['login'])
+    }else{
+      this.auth.loginUser(this.loginUserData)
+        .subscribe(res => {
+            localStorage.setItem('token', res.token)
+            // localStorage.removeItem('admin')
+            this.router.navigate(['/course'])
+          },
+          (     err: any) => {
+            console.log(err)
+          //  this.toast.error({detail:"login failed",summary:'invalid login credentials',duration:5000});
+            this.router.navigate(['login'])
+          });
+  
+     }
   }
 }
