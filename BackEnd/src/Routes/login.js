@@ -57,4 +57,22 @@ router.post('/login', async(req,res) => {
 
 
 
+//professor login
+router.post('/professorlogin', async(req,res) => {
+    const email = req.body.loginUserData.email;
+    const password = req.body.loginUserData.password;
+    console.log(req.body);
+    const user = await userModel.findOne({email:email});
+    console.log(user);
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (isMatch){
+        let payload = {subject: email+password}
+        let token = jwt.sign(payload, 'secretKey')
+        res.status(200).send({token})
+        console.log("key value matches");
+    }else {
+        res.status(401).send("Invalid credentials");
+    }    
+});
+
 module.exports=router;

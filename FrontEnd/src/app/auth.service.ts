@@ -23,6 +23,9 @@ loginUser(loginUserData: any) {
   return this.http.post<any>('http://localhost:3000/login/login',{loginUserData});
 }
 
+professorLogin(loginUserData: any) {
+  return this.http.post<any>('http://localhost:3000/login/professorlogin',{loginUserData});
+}
 
 getToken() {
   return localStorage.getItem('token')
@@ -30,6 +33,26 @@ getToken() {
 
 loggedIn(){
   return !!localStorage.getItem('token')
+}
+
+gettokens(){
+  return localStorage.getItem("tokens")
+
+}
+
+professorloggedIn(){
+  return !!localStorage.getItem("tokens")
+}
+
+verifieduser(id:any){
+  return this.http.post('http://localhost:3000/student/checkverified',{id:id}).subscribe((data)=>{
+   sessionStorage.setItem('verified','true');
+  });
+
+}
+
+userverified(){
+  return !!sessionStorage.getItem('verified');
 }
 
 }

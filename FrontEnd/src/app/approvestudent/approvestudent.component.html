@@ -1,0 +1,67 @@
+<body>
+    <div class="center">
+      <h1>Registration form</h1>
+      <form #form="ngForm" (ngSubmit)="form.valid&&enroll()">
+        <div class="txt_field">
+          <input type="text" name="fullName" #fullName="ngModel" [(ngModel)]="enrolldata.fullName" required>
+          <span></span>
+          <label>Full Name</label>
+          <label class="text-danger" *ngIf="form.submitted&&fullName.errors?.['required']">Full Name required</label>
+        </div>
+        
+        <div class="txt_field">
+            <input type="text" name="email" #email="ngModel" [(ngModel)]="enrolldata.email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+            <span></span>
+            <label>Email</label>
+            <label class="text-danger" *ngIf="form.submitted&&email.errors?.['required']">Email required</label>
+            <label class="text-danger" *ngIf="form.submitted&&email.errors?.['pattern']">Email Invalid</label>          
+            <!-- <label class="text-danger" *ngIf="form.submitted&&email.errors?.['pattern']">Invalid Email Id</label> -->
+          </div>
+          
+          <div class="txt_field">
+            <input type="number" name="phoneNo" #phoneNo="ngModel" [(ngModel)]="enrolldata.phoneNo" pattern="^((\\+91-?)|0)?[0-9]{10}$"  required>
+            <span></span>
+            <label>Phone number</label>
+            <label class="text-danger" *ngIf="form.submitted&&phoneNo.errors?.['required']">Phone number required</label>
+            <label class="text-danger" *ngIf="form.submitted&&phoneNo.errors?.['pattern']">Phone number Invalid</label>
+          <!-- <label class="text-danger" *ngIf="form.submitted&&phone.errors?.['pattern']">Invalid Phone Number</label> -->
+          </div>
+  
+          <div class="txt_field">
+            <input type="text" name="address" #address="ngModel" [(ngModel)]="enrolldata.address" required>
+            <span></span>
+            <label>Address</label>
+            <label class="text-danger" *ngIf="form.submitted&&address.errors?.['required']">Address required</label>
+          </div>
+
+          <div class="txt_field">
+            <input type="text" name="qualification" #qualification="ngModel" [(ngModel)]="enrolldata.qualification" required>
+            <span></span>
+            <label>Qualification</label>
+            <label class="text-danger" *ngIf="form.submitted&&qualification.errors?.['required']">Qualification required</label>
+          </div>
+        
+
+          <div>
+            <label>Select Course</label>
+            <select  class="form-select" aria-label="Default select example" required #course="ngModel" name="course" [(ngModel)]="enrolldata.course">
+                <option *ngFor="let course of courses" value="{{course.name}}">{{course.name}}</option>
+              </select>
+              <label class="text-danger" *ngIf="form.submitted&&course.errors?.['required']">Course required</label>
+
+          </div>
+
+
+           <!-- <input (click)="approve()" type="submit" value="Approve"><br><br> -->
+           <div class="d-grid mt-5">
+            <button type="submit" class="btn btn-primary">Approve</button>
+
+          </div>
+
+           
+        
+      </form>
+    </div>
+  </body>
+  
+
