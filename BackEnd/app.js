@@ -20,6 +20,8 @@ app.get('/', (req, res) => {
 });
 
 const loginRoutes =require("./src/Routes/login");
+const courseRoutes = require("./src/Routes/course");
+const studentRoutes = require("./src/Routes/student");
 
 //DB Connection
 mongoose.connect('mongodb+srv://user_28:user_28@cluster1.cdowv7k.mongodb.net/?retryWrites=true&w=majority', (err)=>{
@@ -33,7 +35,8 @@ mongoose.connect('mongodb+srv://user_28:user_28@cluster1.cdowv7k.mongodb.net/?re
 
 
 app.use("/login", loginRoutes);
-
+app.use("/course", courseRoutes);
+app.use("/student",studentRoutes);
 
 app.listen(port, ()=>{
     console.log("Connected to server:", port)
